@@ -3,11 +3,11 @@
   "secret": "your-random-secret",
   "database": "postgres",
   "postgres": {
-    "host": "${PGHOST}",
-    "port": "${PGPORT}",
-    "database": "${PGDATABASE}",
-    "user": "${PGUSER}",
-    "password": "${PGPASSWORD}"
+    "host": "ep-muddy-hall-a4xfddxq.us-east-1.pg.koyeb.app",
+    "port": "5432",
+    "database": "koyebdb",
+    "user": "koyeb-adm",
+    "password": "******"
   },
   "port": "4567"
 }
