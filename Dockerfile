@@ -11,9 +11,9 @@ RUN apt-get update && apt-get install -y \
 # Set working directory
 WORKDIR /usr/src/app
 
-# Clone NodeBB properly
+# Clone NodeBB properly (with hidden files)
 RUN git clone --branch v3.9.0 --depth 1 https://github.com/NodeBB/NodeBB.git /tmp/nodebb \
-    && mv /tmp/nodebb/* /usr/src/app/ \
+    && cp -r /tmp/nodebb/. /usr/src/app/ \
     && rm -rf /tmp/nodebb
 
 # Install dependencies
