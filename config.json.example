@@ -1,0 +1,13 @@
+{
+  "url": "https://<your-app>.koyeb.app",
+  "secret": "your-random-secret",
+  "database": "postgres",
+  "postgres": {
+    "host": "${PGHOST}",
+    "port": "${PGPORT}",
+    "database": "${PGDATABASE}",
+    "user": "${PGUSER}",
+    "password": "${PGPASSWORD}"
+  },
+  "port": "4567"
+}
