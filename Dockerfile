@@ -1,34 +1,26 @@
-# Use Node.js LTS
+# Use Node.js 20
 FROM node:20-bullseye
 
-# Install build tools and git
+# Install required system packages
 RUN apt-get update && apt-get install -y \
     python3 \
     build-essential \
     git \
- && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/*
 
 # Set working directory
 WORKDIR /usr/src/app
 
-# Clone NodeBB stable release (v3.9.0 as of now)
-RUN git clone --branch v3.9.0 --depth 1 https://github.com/NodeBB/NodeBB.git .
+# Clone NodeBB properly
+RUN git clone --branch v3.9.0 --depth 1 https://github.com/NodeBB/NodeBB.git /tmp/nodebb \
+    && mv /tmp/nodebb/* /usr/src/app/ \
+    && rm -rf /tmp/nodebb
 
 # Install dependencies
-RUN npm install --production
+RUN npm install --omit=dev
 
 # Expose NodeBB port
 EXPOSE 4567
 
-# Environment variables for Koyeb PostgreSQL
-ENV NODEBB_SECRET=changeme \
-    DATABASE=postgres \
-    DATABASE_HOST=ep-muddy-hall-a4xfddxq.us-east-1.pg.koyeb.app \
-    DATABASE_PORT=5432 \
-    DATABASE_USER=koyeb-adm \
-    DATABASE_PASSWORD=yourpassword \
-    DATABASE_NAME=koyebdb \
-    URL=http://localhost:4567
-
-# Run NodeBB
+# Start NodeBB
 CMD ["node", "app.js"]
